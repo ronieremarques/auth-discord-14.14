@@ -1,0 +1,1 @@
+# alterar-logo-discord
