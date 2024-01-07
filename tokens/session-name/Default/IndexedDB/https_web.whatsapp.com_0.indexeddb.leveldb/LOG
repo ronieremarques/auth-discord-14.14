@@ -1,0 +1,14 @@
+2024/01/07-17:18:25.660 3030 Reusing MANIFEST C:\Users\brunomodzs\Downloads\alterar-logo-discord\tokens\session-name\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/01/07-17:18:25.662 3030 Recovering log #99
+2024/01/07-17:18:25.831 3030 Reusing old log C:\Users\brunomodzs\Downloads\alterar-logo-discord\tokens\session-name\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000099.log 
+2024/01/07-17:20:14.057 2b48 Level-0 table #105: started
+2024/01/07-17:20:14.197 2b48 Level-0 table #105: 1295105 bytes OK
+2024/01/07-17:20:14.205 2b48 Delete type=0 #99
+2024/01/07-17:20:14.595 2b48 Compacting 1@1 + 2@2 files
+2024/01/07-17:20:14.786 2b48 Generated table #106@1: 78833 keys, 2271135 bytes
+2024/01/07-17:20:14.868 2b48 Generated table #107@1: 21358 keys, 743316 bytes
+2024/01/07-17:20:14.873 2b48 Compacted 1@1 + 2@2 files => 3014451 bytes
+2024/01/07-17:20:14.879 2b48 compacted to: files[ 0 0 2 0 0 0 0 ]
+2024/01/07-17:20:14.880 2b48 Delete type=2 #101
+2024/01/07-17:20:14.880 2b48 Delete type=2 #102
+2024/01/07-17:20:14.880 2b48 Delete type=2 #105

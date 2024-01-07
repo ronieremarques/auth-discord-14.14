@@ -1,0 +1,21 @@
+{
+  "name": "alterar-logo-discord",
+  "version": "1.0.0",
+  "description": "Um rôbo que a cada 1 minuto altera a imagem do servidor do discord.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.5",
+    "canvas": "^2.11.2",
+    "discord.js": "^14.14.1",
+    "fs": "^0.0.1-security",
+    "gpix": "^1.1.8",
+    "puppeteer": "^21.7.0",
+    "venom-bot": "^5.0.21"
+  }
+}
