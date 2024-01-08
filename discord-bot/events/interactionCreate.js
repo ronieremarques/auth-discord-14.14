@@ -43,6 +43,27 @@ function codeAlreadyUsed(code) {
     return usedCodes.includes(code);
 }
 
+function deleteUserFromJSON(name) {
+    const filePath = path.resolve(__dirname, '../../usuarios.json');
+    const usuariosJSON = require(filePath);
+
+    // Verifica se o usuário está no JSON
+    if (usuariosJSON.usuarios[name]) {
+        // Deleta o usuário do objeto JSON
+        delete usuariosJSON.usuarios[name];
+
+        // Converte o objeto JSON atualizado de volta para string
+        const updatedJSONString = JSON.stringify(usuariosJSON, null, 2);
+
+        // Escreve o conteúdo de volta ao arquivo JSON
+        fs.writeFileSync(filePath, updatedJSONString);
+
+        console.log(`Usuário ${name} removido do arquivo JSON.`);
+    } else {
+        console.log(`Usuário ${name} não encontrado no arquivo JSON.`);
+    }
+}
+
 function addNewUserToJSON(username, userId, code) {
     // Carrega o conteúdo do arquivo JSON existente
     const filePath = path.resolve(__dirname, '../../usuarios.json');
@@ -62,6 +83,32 @@ function addNewUserToJSON(username, userId, code) {
     fs.writeFileSync(filePath, updatedJSONString);
 }
 
+function addLeadToJson(username, userId, userName, userNumber) {
+    const filePath = path.resolve(__dirname, '../../leads.json');
+
+    try {
+        // Tenta ler o conteúdo do arquivo JSON
+        const leadsJSON = require(filePath);
+
+        // Adiciona um novo lead ao objeto JSON
+        leadsJSON.usuarios[username] = {
+            id: userId,
+            name: userName,
+            number: userNumber
+        };
+
+        // Converte o objeto JSON atualizado de volta para string
+        const updatedJSONString = JSON.stringify(leadsJSON, null, 2);
+
+        // Escreve o conteúdo de volta ao arquivo JSON
+        fs.writeFileSync(filePath, updatedJSONString);
+
+        console.log(`Lead ${username} adicionado ao arquivo leads.json.`);
+    } catch (error) {
+        console.error(`Erro ao adicionar lead ao arquivo leads.json: ${error}`);
+    }
+}
+
 async function checkResponseForCode(modalresponse, message, userCode, name, number, success, conexao) {
 
     // Carrega o conteúdo do arquivo JSON
@@ -69,9 +116,13 @@ async function checkResponseForCode(modalresponse, message, userCode, name, numb
     const usuariosJSON = require(filePath);
 
     // Verifica se o usuário está no JSON e se o código corresponde
-    if (usuariosJSON.usuarios[name].code === userCode) {
+    if (usuariosJSON.usuarios[name.username].code === userCode) {
         // Usuário aprovado
-
+        deleteUserFromJSON(name.username);
+        const member = modalresponse.guild.members.cache.get(name.id);
+        const role = member.guild.roles.cache.get("1193212196864405524");
+        await member.roles.add(role);
+        addLeadToJson(name.username, name.id, name.username, number);
         // Adicione aqui qualquer lógica adicional para tratar a aprovação do usuário
         // Por exemplo, você pode adicionar o usuário a um papel específico no Discord.
         await conexao.startTyping(message.from)
@@ -105,20 +156,20 @@ client.on("interactionCreate", async (interaction) => {
         interaction.reply({
             embeds: [
                 new discord.EmbedBuilder()
-                .setDescription(`Precisamos que clique no botão de verificação, solicitado número de whatsapp, você deve preencher com o número de whatsapp correto, assim que preenchido vamos te pedir o código enviado para seu whatsapp que colocou, o número de telefone precisa ter código postal por exemplo se for do brasil é 55 mais o restante do número.\n**Forma correta**: 5500000000000\n**Forma errada**: +55 (00) 00000-0000`)
-                .setTitle("Autenticação")
-                .setColor("Green")
+                .setDescription(`**Forma correta**: 5500000000000\n**Forma errada**: +55 (00) 00000-0000`)
+                
+                .setColor("#E4EDFF")
+                .setImage("https://media.discordapp.net/attachments/1101186731027480797/1193854905744625684/TIGHT_KNIT_SWEATERS.gif?ex=65ae3b06&is=659bc606&hm=6cd6fa5818df3dfff258e42b20cca5cc5dea4e95084790150a5add6f52607c51&=&width=529&height=67")
                 .setTimestamp()
             ],
             components: [
                 new discord.ActionRowBuilder().addComponents(
                     new discord.ButtonBuilder()
-                        .setStyle(discord.ButtonStyle.Success)
-                        .setLabel('WhatsApp')
-                        .setCustomId("whatsapp_code")
-                        .setEmoji("<:whatsapp:1193521703075188806>"),
-                        new discord.ButtonBuilder()
-                        .setStyle(discord.ButtonStyle.Danger)
+                    .setStyle(discord.ButtonStyle.Primary)
+                    .setLabel('WhatsApp')
+                    .setCustomId("whatsapp_code"),
+                    new discord.ButtonBuilder()
+                        .setStyle(discord.ButtonStyle.Primary)
                         .setLabel('Vídeo de ajuda')
                         .setCustomId("video")
                 )
@@ -128,7 +179,7 @@ client.on("interactionCreate", async (interaction) => {
     } else if (interaction.customId === "whatsapp_code") {
         const modal = new discord.ModalBuilder()
             .setCustomId('numberwhatsapp')
-            .setTitle('Número do WhatsApp');
+            .setTitle('WhatsApp');
 
         const phonenumber = new discord.TextInputBuilder()
             .setCustomId('phonenumb')
@@ -175,7 +226,7 @@ client.on("interactionCreate", async (interaction) => {
                         if (/^\d{4}$/.test(message.body)) {
                             // Verifica se o código corresponde
                             const userCode = message.body;
-                            let name = interaction.user.username
+                            let name = interaction.user
                             checkResponseForCode(modalresponse, message, userCode, name, number, success, conexao);
                         }
                     }

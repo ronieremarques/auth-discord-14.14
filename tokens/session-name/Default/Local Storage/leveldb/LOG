@@ -1,3 +1,5 @@
-2024/01/07-17:18:24.831 2b48 Reusing MANIFEST C:\Users\brunomodzs\Downloads\alterar-logo-discord\tokens\session-name\Default\Local Storage\leveldb/MANIFEST-000001
-2024/01/07-17:18:24.835 2b48 Recovering log #26
-2024/01/07-17:18:24.838 2b48 Reusing old log C:\Users\brunomodzs\Downloads\alterar-logo-discord\tokens\session-name\Default\Local Storage\leveldb/000026.log 
+2024/01/08-10:44:17.105 2c18 Reusing MANIFEST C:\Users\brunomodzs\Downloads\alterar-logo-discord\tokens\session-name\Default\Local Storage\leveldb/MANIFEST-000001
+2024/01/08-10:44:17.152 2c18 Recovering log #29
+2024/01/08-10:44:17.152 2c18 Level-0 table #33: started
+2024/01/08-10:44:17.168 2c18 Level-0 table #33: 17244 bytes OK
+2024/01/08-10:44:17.184 2c18 Delete type=0 #29
