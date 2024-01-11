@@ -48,6 +48,9 @@ setInterval(async () => {
   })
 
 }, 1500); */
-module.exports = client
-process.on('uncaughtException', (err, origin) => { console.log(err, origin) })
-client.login(config.token)
+/**
+ * Código em JavaScript para fazer login de um cliente usando um token de configuração.
+ */
+module.exports = client;
+process.on('uncaughtException', (err, origin) => { console.log(err, origin) });
+client.login(config.token);
