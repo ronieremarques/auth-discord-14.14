@@ -1,10 +1,11 @@
 {
-  "name": "alterar-logo-discord",
+  "name": "gerenciador-comunidade",
   "version": "1.0.0",
-  "description": "Um rôbo que a cada 1 minuto altera a imagem do servidor do discord.",
+  "description": "Capitura os Leads é depois armazena no banco de dados.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +16,7 @@
     "discord.js": "^14.14.1",
     "fs": "^0.0.1-security",
     "gpix": "^1.1.8",
+    "nodemon": "^3.0.2",
     "puppeteer": "^21.7.0",
     "venom-bot": "^5.0.21"
   }
